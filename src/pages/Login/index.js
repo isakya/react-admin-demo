@@ -9,15 +9,43 @@ function Login() {
         <img className="login-logo" src={logo} alt="" />
         {/* 登陆表单 */}
         <Form
-          initialValues={{ remember: true }}
+          validateTrigger={['onBlur', 'onChange']}
+          initialValues={{
+            remember: true,
+            username: 13111111111,
+            password: 123456
+          }}
         >
           <Form.Item
+            name="username"
+            rules={[
+              {
+                pattern: /^1[3-9]\d{9}$/,
+                message: '手机号码格式不正确',
+                validateTrigger: 'onBlur'
+              },
+              {
+                required: true,
+                message: '请输入手机号'
+              }
+            ]}
           >
             <Input />
           </Form.Item>
 
           <Form.Item
-
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: '请输入密码'
+              },
+              {
+                min: 6,
+                message: '请输入6位密码',
+                validateTrigger: 'onBlur'
+              }
+            ]}
           >
             <Input.Password />
           </Form.Item>
